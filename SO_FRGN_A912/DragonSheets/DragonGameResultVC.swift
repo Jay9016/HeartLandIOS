@@ -85,29 +85,6 @@ class DragonGameResultVC: UIViewController,UITableViewDelegate,UITableViewDataSo
         
          self.picker?.delegate = self
         
-        
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 13)!]
-//
-//        self.title = "Drag-on & Cling-on Game"
-        
-        let label = UILabel(frame: CGRect(x:0, y:0, width:400, height:50))
-        label.backgroundColor = .clear
-        label.numberOfLines = 2
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textAlignment = .center
-        label.textColor = .white
-        label.text = "Drag-on & Cling-on Game"
-        self.navigationItem.titleView = label
-
-        let button = UIButton.init(type: .custom)
-        button.setImage(UIImage.init(named: "back"), for: UIControlState.normal)
-        button.addTarget(self, action:#selector(self.callMethod), for:.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width: 25, height: 25)
-        button.tintColor = UIColor.white
-        //CGRectMake(0, 0, 30, 30)
-        let barButton = UIBarButtonItem.init(customView: button)
-        self.navigationItem.leftBarButtonItem = barButton
-        
         PagaNumber = ["Page 1 Points","Page 2 Points","Page 3 Points","Page 4 Points","Page 5 Points","Page 6 Points","Page 7 Points","Page 8 Points"]
         
         PointAtPage = [DragonGame.page1PointString,DragonGame.page2PointString,DragonGame.page3PointString,DragonGame.page4PointString,DragonGame.page5PointString, DragonGame.page6PointString,DragonGame.page7PointString,DragonGame.page8PointString]
@@ -156,9 +133,52 @@ class DragonGameResultVC: UIViewController,UITableViewDelegate,UITableViewDataSo
            
         }
         
-        //self.ShowAction()
+        let askButton = UIButton()
+        askButton.frame.size = CGSize(width: self.view.frame.size.width * 0.3, height: 30)
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 15
         
-        //self.showAlert(Title: "INSTRUCTION", Message: "1. You can save your final scores to keep for future reference.\n\n 2. Browse your pase saved final scores.\n\n 3. Print out a PDF of a blank worksheet.")
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        }else{
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        let rightItem = UIBarButtonItem(customView: askButton)
+        self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.rightBarButtonItem = rightItem
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
     @objc func callMethod() {

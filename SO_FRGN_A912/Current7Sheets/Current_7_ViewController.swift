@@ -28,7 +28,7 @@ class Current_7_ViewController: UIViewController {
     var new_final : String = ""
     @IBOutlet weak var NextBtn: UIButton!
     var PdfUrl:String = ""
-     var vwProgressPopup : UIView? = nil
+    var vwProgressPopup : UIView? = nil
     @IBOutlet weak var BackBtn: UIButton!
     @IBAction func BackButtonAction(_ sender: UIButton){
         
@@ -68,10 +68,10 @@ class Current_7_ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool){
         
         //     public static var truthBtnSeventhScreen: Bool=false;
-//        public static var perfectloveBtnSeventhScreen: Bool=false;
-//        public static var icommitloveBtnSeventhScreen: Bool=false;
-//        public static var tohelpBtnSeventhScreen: Bool=false;
-//        public static var successBtnSeventhScreen: Bool=false;
+        //        public static var perfectloveBtnSeventhScreen: Bool=false;
+        //        public static var icommitloveBtnSeventhScreen: Bool=false;
+        //        public static var tohelpBtnSeventhScreen: Bool=false;
+        //        public static var successBtnSeventhScreen: Bool=false;
         if Constants.truthBtnSeventhScreen == true{
             truth_s=1
             truthBtn.setImage(UIImage(named: "checked")?.withRenderingMode(.alwaysOriginal), for: .selected)
@@ -174,7 +174,7 @@ class Current_7_ViewController: UIViewController {
             Constants.successBtnSeventhScreen = false
         }
     }
-   
+    
     @IBAction func next(_ sender: UIButton) {
         new_final = ""
         if(truth_s==1){
@@ -197,15 +197,15 @@ class Current_7_ViewController: UIViewController {
             chk5_str = "Successful WakeUp Sheet"
         }
         Constants.current7 = "\"step7\": {\n" +
-            "      \"choose_opportunity\": \""+new_final.substring(to: new_final.index(before: new_final.endIndex))+"\",\n" +
-            "      \"acknowledge\": \""+acknowledge.text!+"\"\n" +
-            "    },\n" +
-            "    \"commit_to_love\": \""+chk3_str+"\",\n" +
-            "    \"to_help\": \""+chk4_str+"\",\n" +
-            "    \"initials\": \""+initials.text!+"\",\n" +
-            "    \"upset_level_2\": \""+upset_level.text!+"\",\n" +
-            "    \"successful\": \""+chk5_str+"\"\n" +
-            "  }\n" +
+        "      \"choose_opportunity\": \""+new_final.substring(to: new_final.index(before: new_final.endIndex))+"\",\n" +
+        "      \"acknowledge\": \""+acknowledge.text!+"\"\n" +
+        "    },\n" +
+        "    \"commit_to_love\": \""+chk3_str+"\",\n" +
+        "    \"to_help\": \""+chk4_str+"\",\n" +
+        "    \"initials\": \""+initials.text!+"\",\n" +
+        "    \"upset_level_2\": \""+upset_level.text!+"\",\n" +
+        "    \"successful\": \""+chk5_str+"\"\n" +
+        "  }\n" +
         "}";
         
         print(Constants.current1 + Constants.current2 + Constants.current3 + Constants.current4 + Constants.current5 + Constants.current6 + Constants.current7)
@@ -232,36 +232,37 @@ class Current_7_ViewController: UIViewController {
         vwProgressPopup?.addSubview(lblMessage)
         view.addSubview(vwProgressPopup!)
     }
-
     
-func getdatafromAPI()
+    
+    func getdatafromAPI()
     {
-         showProgress(msg: "Loading...", withIndicator: true)
+        showProgress(msg: "Loading...", withIndicator: true)
         let PostString:String = Constants.current1 + Constants.current2 + Constants.current3 + Constants.current4 + Constants.current5 + Constants.current6 + Constants.current7
-         print("PostString",PostString)
-    
-        let url: String = "http://www.wordpress-website.sprybees.com/SO_FRGN_A912/api/callapi.php"
-    
+        print("PostString",PostString)
+        
+        let url: String = "https://healingthewholewoman.whyagain.org/api/callapi.php"
+        
+        
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let data = (PostString.data(using: .utf8))! as Data
         request.httpBody = data
         var obj = Parameters()
-    
-    var data1: NSData = PostString.data(using: .utf8)! as NSData
-    var error: NSError?
-    let header1 = ["Content-Type":"application/json"]
-    // convert NSData to 'AnyObject'
-    let anyObj: [String:Any] = try! JSONSerialization.jsonObject(with: data1 as Data, options: .mutableContainers) as! [String:Any]
-    
-    Alamofire.request(url, method: .post, parameters: anyObj, encoding: JSONEncoding.default, headers: header1).response { (data) in
+        
+        var data1: NSData = PostString.data(using: .utf8)! as NSData
+        var error: NSError?
+        let header1 = ["Content-Type":"application/json"]
+        // convert NSData to 'AnyObject'
+        let anyObj: [String:Any] = try! JSONSerialization.jsonObject(with: data1 as Data, options: .mutableContainers) as! [String:Any]
+        
+        Alamofire.request(url, method: .post, parameters: anyObj, encoding: JSONEncoding.default, headers: header1).response { (data) in
             if let data = data.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)") // original server data as UTF8 string
                 if let newData = utf8Text.data(using: String.Encoding.utf8){
                     do{
-                    let json = try JSON(data: newData)
-                    let thedata = json["response"]
+                        let json = try JSON(data: newData)
+                        let thedata = json["response"]
                         if(thedata.stringValue == "success"){
                             
                             let prodarray = json["response_data"]
@@ -289,8 +290,6 @@ func getdatafromAPI()
                 }
             }
         }
-    
-    
     }
     
     func ShowAlert(_ AlertTitle:String, AlertMessage:String, AlertTag:NSInteger) {
@@ -322,7 +321,7 @@ func getdatafromAPI()
     }
     
     func ResetButtons(){
-     
+        
         Constants.FirstBtnFirstScreenSecandSheet  = false;
         Constants.SecandBtnFirstScreenSecandSheet = false;
         Constants.ThirdBtnFirstScreenSecandSheet = false;
@@ -360,7 +359,7 @@ func getdatafromAPI()
         Constants.tohelpBtnSeventhScreen=false;
         Constants.successBtnSeventhScreen=false;
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "toShowResult"?:
@@ -376,27 +375,8 @@ func getdatafromAPI()
     let textfieldDelegate = RDTextFieldDelegate()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let longTitleLabel = UILabel()
-        longTitleLabel.backgroundColor = UIColor.clear
-        longTitleLabel.numberOfLines = 2
-        if UIDevice().userInterfaceIdiom == .phone {
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-        }else{
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        }
-        longTitleLabel.textAlignment = .left
-        longTitleLabel.textColor = UIColor.white
-        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-        longTitleLabel.sizeToFit()
-        self.navigationItem.hidesBackButton = true
-        let leftItem = UIBarButtonItem(customView: longTitleLabel)
-        self.navigationItem.leftBarButtonItem = leftItem
         
-       ScrollView.contentSize = CGSize(width: ScrollView.contentSize.width, height: 870)
+        ScrollView.contentSize = CGSize(width: ScrollView.contentSize.width, height: 870)
         
         self.initials.layer.masksToBounds = false
         self.initials.layer.cornerRadius = 7
@@ -449,11 +429,60 @@ func getdatafromAPI()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
         
-         tohelpBtn.setTitle("Place the initials of and cancel the goal for " + thirdscreenstring + " for everyone who has not fulfilled this goal when I held it for them.", for: .normal)
+        tohelpBtn.setTitle("Place the initials of and cancel the goal for " + thirdscreenstring + " for everyone who has not fulfilled this goal when I held it for them.", for: .normal)
         tohelpBtn.setTitle("Place the initials of and cancel the goal for " + thirdscreenstring + " for everyone who has not fulfilled this goal when I held it for them.", for: .selected)
         
         lovinggoal.text = FSFFString + ", based on " + thirdscreenstring + " I structure a truly Loving goal toward you and offer to you "
-
+        
+        let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.42)) / 2
+        let btnY = (self.view.frame.size.height - (hasBottomNotch ? 140 : 100))
+        let askButton = UIButton(frame: CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.42, height: 30))
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        if UIDevice().userInterfaceIdiom == .phone {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+        } else {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        }
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 15
+        self.view.addSubview(askButton)
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        } else {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let tapURL = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tapURL)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {        // handling code
@@ -461,24 +490,9 @@ func getdatafromAPI()
         self.view.endEditing(true)
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
 extension Current_7_ViewController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
         let vc = Current_7_ViewController()

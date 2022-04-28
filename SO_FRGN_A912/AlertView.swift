@@ -51,6 +51,28 @@ func SetAlert(Title:String,Message:String,View:UIViewController)  {
     
 }
 
+var hasBottomNotch: Bool {
+    if #available(iOS 11.0, tvOS 11.0, *) {
+        return UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0 > 20
+    }
+    return false
+}
+
+func showAlertViewWithText(_ text: String)-> UIAlertController  {
+    let alert = UIAlertController(title: text, message: "", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+    return alert
+}
+
+extension String {
+    
+    func isValidEmail() -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: self)
+    }
+}
+
 class ClosureSleeve {
   let closure: () -> ()
 
@@ -70,3 +92,4 @@ extension UIControl {
         addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
     }
 }
+

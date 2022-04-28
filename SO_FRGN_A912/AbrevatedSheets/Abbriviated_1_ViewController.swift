@@ -9,7 +9,7 @@
 import UIKit
 var FirstScreenString:String = ""
 
-class Abbriviated_1_ViewController: UIViewController,UIGestureRecognizerDelegate {
+class Abbriviated_1_ViewController: UIViewController {
 
     @IBOutlet weak var punish: UITextView!
     @IBOutlet weak var thoughts: UITextView!
@@ -73,36 +73,6 @@ class Abbriviated_1_ViewController: UIViewController,UIGestureRecognizerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Constants.name)
-        
-//        let label: UILabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 200, height: 50)))
-//        label.backgroundColor = UIColor.clear
-//        label.numberOfLines = 2
-//        label.font = UIFont.boldSystemFont(ofSize: 14)
-//        label.textAlignment = .left
-//        label.textColor = UIColor.white
-//        label.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-//        self.navigationItem.titleView = label
-        
-        let longTitleLabel = UILabel()
-        longTitleLabel.backgroundColor = UIColor.clear
-        longTitleLabel.numberOfLines = 2
-        if UIDevice().userInterfaceIdiom == .phone {
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-        }else{
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        }
-        longTitleLabel.textAlignment = .left
-        longTitleLabel.textColor = UIColor.white
-        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-        longTitleLabel.sizeToFit()
-        self.navigationItem.hidesBackButton = true
-        
-        let leftItem = UIBarButtonItem(customView: longTitleLabel)
-        self.navigationItem.leftBarButtonItem = leftItem
         
         self.punish.layer.masksToBounds = false
         self.punish.layer.cornerRadius = 7
@@ -181,11 +151,6 @@ class Abbriviated_1_ViewController: UIViewController,UIGestureRecognizerDelegate
         self.view.addGestureRecognizer(tap)
  
         self.SetFrames()
-            
-        
-//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
-//        self.navigationItem.leftBarButtonItem = newBackButton
-        
         
         whoiamLbl.isUserInteractionEnabled = true // Remember to do this
         let taplabel: UITapGestureRecognizer = UITapGestureRecognizer(
@@ -193,6 +158,55 @@ class Abbriviated_1_ViewController: UIViewController,UIGestureRecognizerDelegate
         whoiamLbl.addGestureRecognizer(taplabel)
         taplabel.delegate = (self as UIGestureRecognizerDelegate)
         
+        let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.42)) / 2
+        let btnY = (self.view.frame.size.height - (hasBottomNotch ? 140 : 100))
+        let askButton = UIButton(frame: CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.42, height: 30))
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        if UIDevice().userInterfaceIdiom == .phone {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+        } else {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        }
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 15
+        self.view.addSubview(askButton)
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        } else {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let tapURL = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tapURL)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func didTapLabelDemo(sender: UITapGestureRecognizer)

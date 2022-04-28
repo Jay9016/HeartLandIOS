@@ -17,26 +17,6 @@ class ResultViewController: UIViewController,UITextViewDelegate {
     @IBOutlet weak var donateBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let longTitleLabel = UILabel()
-        longTitleLabel.backgroundColor = UIColor.clear
-        longTitleLabel.numberOfLines = 2
-        if UIDevice().userInterfaceIdiom == .phone {
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-        }else{
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        }
-        longTitleLabel.textAlignment = .left
-        longTitleLabel.textColor = UIColor.white
-        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-        longTitleLabel.sizeToFit()
-        self.navigationItem.hidesBackButton = true
-        let leftItem = UIBarButtonItem(customView: longTitleLabel)
-        self.navigationItem.leftBarButtonItem = leftItem
-        
         
         self.showresultBtn.layer.masksToBounds = false
         self.showresultBtn.layer.cornerRadius = 7
@@ -61,6 +41,33 @@ class ResultViewController: UIViewController,UITextViewDelegate {
         self.donateBtn.titleLabel?.attributedText = underlineAttributedString
         
         // Do any additional setup after loading the view.
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        } else {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        longTitleLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
     }
     
     @IBAction func DonateButtonAction(_ sender: Any) {
@@ -70,6 +77,7 @@ class ResultViewController: UIViewController,UITextViewDelegate {
             UIApplication.shared.open(url)
         }
     }
+    
     @IBAction func ShowResultButtonAction(_ sender: Any) {
         
         print(self.PdfUrl)

@@ -42,23 +42,61 @@ class DragonInstructionViewController: UIViewController {
         tip5Lb3.adjustsFontSizeToFitWidth = true
         tip6Lb4.adjustsFontSizeToFitWidth = true
         
-        navigationController?.navigationBar.barTintColor = .red
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.barTintColor = .red
+//        navigationController?.navigationBar.tintColor = .white
+//        navigationController?.navigationBar.isTranslucent = false
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
         
-        self.title = "Drag-on & Cling-on Game"
+//        self.title = "Drag-on & Cling-on Game"
         
         
-        let button = UIButton.init(type: .custom)
-        button.setImage(UIImage.init(named: "back"), for: UIControlState.normal)
-        button.addTarget(self, action:#selector(self.callMethod), for:.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
-        button.tintColor = UIColor.white
-        //CGRectMake(0, 0, 30, 30)
-        let barButton = UIBarButtonItem.init(customView: button)
-        self.navigationItem.leftBarButtonItem = barButton
+//        let button = UIButton.init(type: .custom)
+//        button.setImage(UIImage.init(named: "back"), for: UIControlState.normal)
+//        button.addTarget(self, action:#selector(self.callMethod), for:.touchUpInside)
+//        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
+//        button.tintColor = UIColor.white
+//        //CGRectMake(0, 0, 30, 30)
+//        let barButton = UIBarButtonItem.init(customView: button)
+//        self.navigationItem.leftBarButtonItem = barButton
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        let askButton = UIButton()
+        askButton.frame.size = CGSize(width: self.view.frame.size.width * 0.3, height: 30)
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        
+        askButton.layer.cornerRadius = 15
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        }else{
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        let rightItem = UIBarButtonItem(customView: askButton)
+        self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.rightBarButtonItem = rightItem
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        longTitleLabel.addGestureRecognizer(tap)
+        
         
         firstinstructionLbl.layer.borderWidth = 1.0
         firstinstructionLbl.layer.borderColor = UIColor.white.cgColor
@@ -98,6 +136,18 @@ class DragonInstructionViewController: UIViewController {
             
         }
         
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func callMethod() {
@@ -143,4 +193,10 @@ class DragonInstructionViewController: UIViewController {
     }
     */
 
+}
+
+extension UIViewController: UIGestureRecognizerDelegate {
+    private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

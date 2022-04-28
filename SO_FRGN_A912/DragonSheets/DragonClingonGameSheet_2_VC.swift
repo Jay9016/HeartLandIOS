@@ -159,20 +159,6 @@ class DragonClingonGameSheet_2_VC: UIViewController {
 //
 //        }
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
-        
-        self.title = "Drag-on & Cling-on Game"
-        
-        
-        let button = UIButton.init(type: .custom)
-        button.setImage(UIImage.init(named: "back"), for: UIControlState.normal)
-        button.addTarget(self, action:#selector(self.callMethod), for:.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
-        button.tintColor = UIColor.white
-        //CGRectMake(0, 0, 30, 30)
-        let barButton = UIBarButtonItem.init(customView: button)
-        self.navigationItem.leftBarButtonItem = barButton
-        
         if(UIDevice .current.userInterfaceIdiom == .phone) {
             
             MainScrollView.contentSize = CGSize(width: self.MainScrollView.bounds.width, height: 1150)
@@ -230,9 +216,6 @@ class DragonClingonGameSheet_2_VC: UIViewController {
         
         //textfieldDelegate.initWithTextFields([self.answerfirstTV,self.answerSecandTV, self.answerthirdTV], onView: self.view)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        self.view.addGestureRecognizer(tap)
-        
         quetion_D_Lbl.text = " D. NAME THOSE “CLING-ONS”! List your thoughts, beliefs, or judgments about this situation or person (" + DragonGame.page1TV1String + "): (Really go for it! Say what you think!)"
         
         
@@ -280,6 +263,52 @@ class DragonClingonGameSheet_2_VC: UIViewController {
             
         }
         
+        let askButton = UIButton()
+        askButton.frame.size = CGSize(width: self.view.frame.size.width * 0.3, height: 30)
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 15
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        }else{
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        let rightItem = UIBarButtonItem(customView: askButton)
+        self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.rightBarButtonItem = rightItem
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func callMethod() {

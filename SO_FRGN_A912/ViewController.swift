@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var DragonClingonGameBtn: UIButton!
     @IBOutlet weak var CommitmentButton: UIButton!
     @IBOutlet weak var KnowMoreBtn: UIButton!
+    @IBOutlet weak var EventBtn: UIButton!
+    @IBOutlet weak var MoreBtn: UIButton!
+    @IBOutlet weak var SendUsQuestionsBtn: UIButton!
     @IBOutlet weak var HeartShapeBtnLeft: UIImageView!
     @IBOutlet weak var HeartShapeBtnRight: UIImageView!
     @IBOutlet weak var middleLbl: UILabel!
@@ -34,36 +37,111 @@ class ViewController: UIViewController {
     @IBOutlet weak var couplelogo_ImgView: UIImageView!
 //    @IBOutlet weak var Main_BG: UIImageView!
     @IBOutlet weak var mainbg_ImgView: UIImageView!
+    @IBOutlet weak var ListenRadioShowBtn: UIButton!
     
-    @IBAction func ToPersonalInfo(_ sender: UIButton) {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        self.IsGotoDragonSheet = false
-        sheetname = "sheet1"
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
-        self.ResetButtonsOFSecand()
+        // Do any additional setup after loading the view, typically from a nib.
+        self.RealityWakeUpBtn.layer.masksToBounds = false
+        self.RealityWakeUpBtn.layer.cornerRadius = 10
+        self.RealityWakeUpBtn.layer.shadowColor = UIColor.black.cgColor
+        self.RealityWakeUpBtn.layer.borderWidth = 1.0
+        self.RealityWakeUpBtn.clipsToBounds = false
         
-        if  UserDefaults.exists(key: "IsInfoSave") == true{
-            performSegue(withIdentifier: "ToSheetFirst", sender: self)
-        }else{
-            performSegue(withIdentifier: "toPersonalInfo", sender: self)
+        self.CurrentStepBtn.layer.masksToBounds = false
+        self.CurrentStepBtn.layer.cornerRadius = 10
+        self.CurrentStepBtn.layer.shadowColor = UIColor.black.cgColor
+        self.CurrentStepBtn.layer.borderWidth = 1.0
+        self.CurrentStepBtn.clipsToBounds = false
+        
+        self.DragonClingonGameBtn.layer.masksToBounds = false
+        self.DragonClingonGameBtn.layer.cornerRadius = 10
+        self.DragonClingonGameBtn.layer.borderColor = UIColor.black.cgColor
+        self.DragonClingonGameBtn.layer.borderWidth = 1.0
+        self.DragonClingonGameBtn.clipsToBounds = false
+        
+        self.CommitmentButton.layer.masksToBounds = false
+        self.CommitmentButton.layer.cornerRadius = 10
+        self.CommitmentButton.layer.borderColor = UIColor.black.cgColor
+        self.CommitmentButton.layer.borderWidth = 1.0
+        self.CommitmentButton.clipsToBounds = false
+        
+        self.EventBtn.layer.masksToBounds = false
+        self.EventBtn.layer.cornerRadius = 10
+        self.EventBtn.layer.borderColor = UIColor.black.cgColor
+        self.EventBtn.layer.borderWidth = 1.0
+        self.EventBtn.clipsToBounds = false
+        
+        self.MoreBtn.layer.masksToBounds = false
+        self.MoreBtn.layer.cornerRadius = 10
+        self.MoreBtn.layer.borderColor = UIColor.black.cgColor
+        self.MoreBtn.layer.borderWidth = 1.0
+        self.MoreBtn.clipsToBounds = false
+        
+        self.SendUsQuestionsBtn.layer.masksToBounds = false
+        self.SendUsQuestionsBtn.layer.cornerRadius = 10
+        self.SendUsQuestionsBtn.layer.borderColor = UIColor.black.cgColor
+        self.SendUsQuestionsBtn.layer.borderWidth = 1.0
+        self.SendUsQuestionsBtn.clipsToBounds = false
+        
+        self.ListenRadioShowBtn.layer.masksToBounds = false
+        self.ListenRadioShowBtn.layer.cornerRadius = 10
+        self.ListenRadioShowBtn.layer.borderColor = UIColor.black.cgColor
+        self.ListenRadioShowBtn.layer.borderWidth = 1.0
+        self.ListenRadioShowBtn.clipsToBounds = false
+        
+        self.SetFrames()
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        } else {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        longTitleLabel.addGestureRecognizer(tap)
     }
     
-    @IBAction func toPersonalInfo2(_ sender: UIButton) {
-        
-        self.IsGotoDragonSheet = false
-        
-        self.ResetButtonsOfFirst()
-        
-        sheetname = "sheet2"
-        
-        if  UserDefaults.exists(key: "IsInfoSave") == true{
-            
-            performSegue(withIdentifier: "ToSheetSecand", sender: self)
-            
-        }else{
-            performSegue(withIdentifier: "toPersonalInfo", sender: self)
-        }
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func DragonClingonGameButtonAction(_ sender: Any) {//DragonIditifier
+        performSegue(withIdentifier: "ToDrgaonGameIdentifier", sender: self)
+    }
+    
+    @IBAction func EventButtonAction(_ sender: Any) {//DragonIditifier
+        guard let url = URL(string: "https://whyagain.org/schedule/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func MoreButtonAction(_ sender: Any) {//DragonIditifier
+        guard let url = URL(string: "https://whyagain.org/more/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func RadioShowButtonAction(_ sender: Any) {//DragonIditifier
+        guard let url = URL(string: "https://whyagain.org/mindshifters-radio-the-forgiveness-doctor/") else { return }
+        UIApplication.shared.open(url)
     }
     
     func ResetButtonsOFSecand() {
@@ -132,85 +210,6 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        UserDefaults.standard.set("", forKey: "Name")
-//        UserDefaults.standard.set("", forKey: "mobile")
-//        UserDefaults.standard.set("", forKey: "email")
-//        UserDefaults.standard.set(false, forKey: "IsInfoSave")
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        self.RealityWakeUpBtn.layer.masksToBounds = false
-        self.RealityWakeUpBtn.layer.cornerRadius = 10
-        self.RealityWakeUpBtn.layer.shadowColor = UIColor.black.cgColor
-        self.RealityWakeUpBtn.layer.borderWidth = 1.0
-        self.RealityWakeUpBtn.clipsToBounds = false
-        
-        self.CurrentStepBtn.layer.masksToBounds = false
-        self.CurrentStepBtn.layer.cornerRadius = 10
-        self.CurrentStepBtn.layer.shadowColor = UIColor.black.cgColor
-        self.CurrentStepBtn.layer.borderWidth = 1.0
-        self.CurrentStepBtn.clipsToBounds = false
-        
-        self.DragonClingonGameBtn.layer.masksToBounds = false
-        self.DragonClingonGameBtn.layer.cornerRadius = 10
-        self.DragonClingonGameBtn.layer.borderColor = UIColor.black.cgColor
-        self.DragonClingonGameBtn.layer.borderWidth = 1.0
-        self.DragonClingonGameBtn.clipsToBounds = false
-        
-        self.CommitmentButton.layer.masksToBounds = false
-        self.CommitmentButton.layer.cornerRadius = 10
-        self.CommitmentButton.layer.borderColor = UIColor.black.cgColor
-        self.CommitmentButton.layer.borderWidth = 1.0
-        self.CommitmentButton.clipsToBounds = false
-        
-//        self.DragonClingonGameBtn.layer.masksToBounds = false
-//        self.DragonClingonGameBtn.layer.cornerRadius = 10
-//        self.DragonClingonGameBtn.layer.shadowColor = UIColor.black.cgColor
-//        self.DragonClingonGameBtn.layer.borderWidth = 1.0
-//        self.DragonClingonGameBtn.clipsToBounds = false
-//        
-//        let label: UILabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 400, height: 50)))
-//        label.backgroundColor = UIColor.clear
-//        label.numberOfLines = 2
-//        label.font = UIFont.boldSystemFont(ofSize: 14)
-//        label.textAlignment = .center
-//        label.textColor = UIColor.white
-//        label.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-//        //label.font = UIFont.boldSystemFont(ofSize: 15)
-//        self.navigationItem.titleView = label
-        
-        let longTitleLabel = UILabel()
-        longTitleLabel.backgroundColor = UIColor.clear
-        longTitleLabel.numberOfLines = 2
-        
-        if UIDevice().userInterfaceIdiom == .phone {
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-        }else{
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        }
-        
-        longTitleLabel.textAlignment = .left
-        longTitleLabel.textColor = UIColor.white
-        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-        longTitleLabel.sizeToFit()
-        self.navigationItem.hidesBackButton = true
-        let leftItem = UIBarButtonItem(customView: longTitleLabel)
-        self.navigationItem.leftBarButtonItem = leftItem
-        
-        self.SetFrames()
-    }
-    
-    @IBAction func DragonClingonGameButtonAction(_ sender: Any) {//DragonIditifier
-        
-        performSegue(withIdentifier: "ToDrgaonGameIdentifier", sender: self)
-        
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         print(self.IsGotoDragonSheet)
@@ -221,18 +220,23 @@ class ViewController: UIViewController {
             case "toPersonalInfo"?:
                 let destVC = segue.destination as! PersonalInfoViewController
                 destVC.whichSheet=sheetname
-        
+                break
+                
             case "ToSheetSecand"?:
                 let destVC = segue.destination as! Current_1_ViewController
                 destVC.whichSheet=sheetname
+                break
+                
             case "ToSheetFirst"?:
                 let destVC = segue.destination as! Abbriviated_1_ViewController//ToDrgaonGameIdentifier
                 destVC.whichSheet=sheetname
+                
                 break
             case "ToDrgaonGameIdentifier"?:
                 let destVC = segue.destination as! DragonInstructionViewController//ToDrgaonGameIdentifier
                 //destVC.whichSheet=sheetname
                 break
+                
             default:
                 break
             }
@@ -242,114 +246,70 @@ class ViewController: UIViewController {
     func SetFrames(){
         
         if UIDevice().userInterfaceIdiom == .phone {
-            self.RealityWakeUpBtn.frame.origin.y = 100
-            self.CurrentStepBtn.frame.origin.y = self.GetYandHeight(passView: RealityWakeUpBtn)
-            self.DragonClingonGameBtn.frame.origin.y = self.GetYandHeight(passView: CurrentStepBtn)
-            self.CommitmentButton.frame.origin.y = self.GetYandHeight(passView: DragonClingonGameBtn)
-            self.middleLbl.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
-            self.HeartShapeBtnLeft.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
-            self.HeartShapeBtnRight.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
-            self.couplelogo_ImgView.frame.origin.y = self.GetYandHeight(passView: middleLbl)
+            self.RealityWakeUpBtn.frame.origin.y = 20
+            self.CurrentStepBtn.frame.origin.y = self.GetYandHeight(passView: RealityWakeUpBtn) - 5
+            self.DragonClingonGameBtn.frame.origin.y = self.GetYandHeight(passView: CurrentStepBtn) - 5
+            self.CommitmentButton.frame.origin.y = self.GetYandHeight(passView: DragonClingonGameBtn) - 5
+            self.MoreBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton) - 5
+            self.EventBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton) - 5
+            self.SendUsQuestionsBtn.frame.origin.y = self.GetYandHeight(passView: EventBtn) - 5
+            self.middleLbl.frame.origin.y = self.GetYandHeight(passView: SendUsQuestionsBtn) - 5
+            self.HeartShapeBtnLeft.frame.origin.y = self.GetYandHeight(passView: SendUsQuestionsBtn) - 5
+            self.HeartShapeBtnRight.frame.origin.y = self.GetYandHeight(passView: SendUsQuestionsBtn) - 5
+            self.couplelogo_ImgView.frame.origin.y = self.GetYandHeight(passView: middleLbl) + 5
             self.nameLbl.frame.origin.y = self.GetYandHeight(passView: couplelogo_ImgView)
             self.KnowMoreBtn.frame.origin.y = self.GetYandHeight(passView: nameLbl) - 10
-            self.BottomLblFirst.frame.origin.y = self.GetYandHeight(passView: KnowMoreBtn) - 10
-            self.BottomLblSecand.frame.origin.y = self.GetYandHeight(passView: BottomLblFirst) - 10
-            self.BottomLblThird.frame.origin.y = self.GetYandHeight(passView: BottomLblSecand) - 10
+            self.BottomLblFirst.frame.origin.y = self.GetYandHeight(passView: KnowMoreBtn) - 5
+            self.BottomLblSecand.frame.origin.y = self.GetYandHeight(passView: BottomLblFirst) - 5
+            self.BottomLblThird.frame.origin.y = self.GetYandHeight(passView: BottomLblSecand) - 5
+            self.ListenRadioShowBtn.frame.origin.y = self.GetYandHeight(passView: BottomLblThird) - 5
         } else {
-            self.RealityWakeUpBtn.frame.origin.y = 100
+            self.RealityWakeUpBtn.frame.origin.y = 20
             self.CurrentStepBtn.frame.origin.y = self.GetYandHeight(passView: RealityWakeUpBtn)
             self.DragonClingonGameBtn.frame.origin.y = self.GetYandHeight(passView: CurrentStepBtn)
             self.CommitmentButton.frame.origin.y = self.GetYandHeight(passView: DragonClingonGameBtn)
+            self.MoreBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton) - 5
+            self.EventBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton) - 5
+            self.SendUsQuestionsBtn.frame.origin.y = self.GetYandHeight(passView: EventBtn) - 5
             self.middleLbl.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
             self.HeartShapeBtnLeft.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
             self.HeartShapeBtnRight.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
             self.couplelogo_ImgView.frame.origin.y = self.GetYandHeight(passView: middleLbl)
             
         }
-        
-        
-//        if UIDevice().userInterfaceIdiom == .phone {
-//            //[UIScreen mainScreen].bounds.size.height > 480.0f ? 200 : 100;
-//            if UIScreen.main.bounds.height == 667{
-//
-//
-//
-//                print("i am here")
-//            }else if UIScreen.main.bounds.height == 812{
-//
-//
-//                self.couplelogo_ImgView.frame = CGRect(x: 112, y: 370, width: 150, height: 150)
-//                self.mainbg_ImgView.frame = CGRect(x: 0, y: 0, width: 375, height: 812)
-//
-//                self.RealityWakeUpBtn.frame = CGRect(x: 17, y: 120, width: 335, height: 40)
-//                self.CurrentStepBtn.frame = CGRect(x: 17, y: 170, width: 335, height: 40)
-//                self.DragonClingonGameBtn.frame = CGRect(x: 17, y: 220, width: 335, height: 40)
-//                self.CommitmentButton.frame = CGRect(x: 17, y: 270, width: 335, height: 40)
-//                self.middleLbl.frame = CGRect(x: 37, y: 280, width: 300, height: 35)
-//                self.HeartShapeBtnLeft.frame = CGRect(x: 15, y: 280, width: 30, height: 30)
-//                self.HeartShapeBtnRight.frame = CGRect(x: 330, y: 280, width: 30, height: 30)
-//                self.nameLbl.frame = CGRect(x: 37, y: 530, width: 300, height: 30)
-//                self.KnowMoreBtn.frame = CGRect(x: 130, y: 560, width: 120, height: 40)
-//                self.BottomLblFirst.frame = CGRect(x: 20, y: 610, width: 350, height: 35)
-//                self.BottomLblSecand.frame = CGRect(x: 20, y: 640, width: 350, height: 35)
-//                self.BottomLblThird.frame = CGRect(x: 20, y: 670, width: 350, height: 35)
-//
-//            }else if UIScreen.main.bounds.height == 568{
-//
-//                self.RealityWakeUpBtn.frame = CGRect(x: 10, y: 100, width: 300, height: 40)
-//                self.CurrentStepBtn.frame = CGRect(x: 10, y: 150, width: 300, height: 40)
-//                self.DragonClingonGameBtn.frame = CGRect(x: 10, y: 200, width: 300, height: 40)
-//                self.CommitmentButton.frame = CGRect(x: 17, y: 250, width: 335, height: 40)
-//
-//                self.middleLbl.frame = CGRect(x: 35, y: 260, width: 250, height: 35)
-//                self.HeartShapeBtnLeft.frame = CGRect(x: 15, y: 260, width: 30, height: 30)
-//                self.HeartShapeBtnRight.frame = CGRect(x: 280, y: 260, width: 30, height: 30)
-//
-//                self.couplelogo_ImgView.frame = CGRect(x: 100, y: 300, width: 110, height: 110)
-//                self.mainbg_ImgView.frame = CGRect(x: 0, y: 0, width: 320, height: 568)
-//
-//                self.nameLbl.frame = CGRect(x: 20, y: 420, width: 280, height: 20)
-//                self.KnowMoreBtn.frame = CGRect(x: 20, y: 450, width: 280, height: 20)
-//                self.BottomLblFirst.frame = CGRect(x: 20, y: 480, width: 280, height: 20)
-//                self.BottomLblSecand.frame = CGRect(x: 0, y: 510, width: 320, height: 20)
-//                self.BottomLblThird.frame = CGRect(x: 20, y: 540, width: 280, height: 20)
-//
-//
-//                self.nameLbl.adjustsFontSizeToFitWidth = true
-//                self.KnowMoreBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-//                self.BottomLblFirst.adjustsFontSizeToFitWidth = true
-//                self.BottomLblSecand.adjustsFontSizeToFitWidth = true
-//                self.BottomLblThird.adjustsFontSizeToFitWidth = true
-//
-//                self.middleLbl.adjustsFontSizeToFitWidth = true
-//
-//                self.BottomLblFirst.font =  UIFont.systemFont(ofSize: 11, weight: .bold)
-//                self.BottomLblSecand.font =  UIFont.systemFont(ofSize: 11, weight: .bold)
-//                self.BottomLblThird.font =  UIFont.systemFont(ofSize: 11, weight: .bold)
-//                self.middleLbl.font =  UIFont.systemFont(ofSize: 12, weight: .bold)
-//                self.RealityWakeUpBtn.titleLabel?.font =  UIFont.systemFont(ofSize: 15, weight: .bold)
-//                self.CurrentStepBtn.titleLabel?.font =  UIFont.systemFont(ofSize: 15, weight: .bold)
-//                self.DragonClingonGameBtn.titleLabel?.font =  UIFont.systemFont(ofSize: 15, weight: .bold)
-//
-//
-//            }
-//        }
-        
     }
     
     func GetYandHeight(passView:UIView)->CGFloat {
-        
         var NewY : CGFloat = 0
-        
         NewY = passView.frame.origin.y + passView.frame.size.height + 10
-        
         return NewY
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func ToPersonalInfo(_ sender: UIButton) {
+        
+        self.IsGotoDragonSheet = false
+        sheetname = "sheet1"
+        
+        self.ResetButtonsOFSecand()
+        
+        if  UserDefaults.exists(key: "IsInfoSave") == true{
+            performSegue(withIdentifier: "ToSheetFirst", sender: self)
+        }else{
+            performSegue(withIdentifier: "toPersonalInfo", sender: self)
+        }
     }
-
-
+    
+    @IBAction func toPersonalInfo2(_ sender: UIButton) {
+        
+        self.IsGotoDragonSheet = false
+        self.ResetButtonsOfFirst()
+        sheetname = "sheet2"
+        
+        if UserDefaults.exists(key: "IsInfoSave") == true{
+            performSegue(withIdentifier: "ToSheetSecand", sender: self)
+        }else{
+            performSegue(withIdentifier: "toPersonalInfo", sender: self)
+        }
+    }
 }
 

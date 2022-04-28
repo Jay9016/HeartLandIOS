@@ -13,10 +13,6 @@ class DragonClingonGameSheet_8_VC: UIViewController {
     @IBOutlet weak var MainScrollView: UIScrollView!
     @IBOutlet weak var MainUiView: UIView!
     @IBOutlet weak var BGImageView: UIImageView!
-    
-    
-    
-    
     @IBOutlet weak var pagetitleLbl: UILabel!
     @IBOutlet weak var quetions_X_lbl: UILabel!
     @IBOutlet weak var quetion_X_boolean_UIview: UIView!
@@ -25,11 +21,6 @@ class DragonClingonGameSheet_8_VC: UIViewController {
     @IBOutlet weak var quetion_X_answer_UIView: UIView!
     @IBOutlet weak var scorepointsLbl_X: UILabel!
     @IBOutlet weak var pointsLbl_X: UILabel!
-    
-  
-    
-    
-   
     @IBOutlet weak var quetions_Y_lbl: UILabel!
     @IBOutlet weak var quetion_Y_boolean_UIview: UIView!
     @IBOutlet weak var quetioon_Y_booleanBtn: UIButton!
@@ -37,26 +28,15 @@ class DragonClingonGameSheet_8_VC: UIViewController {
     @IBOutlet weak var quetion_Y_answer_UIView: UIView!
     @IBOutlet weak var scorepointsLbl_Y: UILabel!
     @IBOutlet weak var pointsLbl_Y: UILabel!
-    
-   
-    
-
     @IBOutlet weak var quetions_Z_lbl: UILabel!
     @IBOutlet weak var quetion_Z_boolean_UIview: UIView!
     @IBOutlet weak var quetioon_Z_booleanBtn: UIButton!
     @IBOutlet weak var quetiuon_Z_truefalseLbl: UILabel!
     @IBOutlet weak var quetion_Z_answer_UIView: UIView!
-    
-    
-    
     @IBOutlet weak var scorepointsLbl_Z: UILabel!
     @IBOutlet weak var pointsLbl_Z: UILabel!
-    
     @IBOutlet weak var breathLbl: UILabel!
     @IBOutlet weak var totalpagepointsLbl: UILabel!
-
-    
-    
     @IBOutlet weak var nextBtn: UIButton!
     
     let textfieldDelegate = RDTextFieldDelegate()
@@ -75,34 +55,12 @@ class DragonClingonGameSheet_8_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // self.title = "Dragon Clingon Game"
-        
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
-        
-        self.title = "Drag-on & Cling-on Game"
-        
-        
-        let button = UIButton.init(type: .custom)
-        button.setImage(UIImage.init(named: "back"), for: UIControlState.normal)
-        button.addTarget(self, action:#selector(self.callMethod), for:.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
-        button.tintColor = UIColor.white
-        //CGRectMake(0, 0, 30, 30)
-        let barButton = UIBarButtonItem.init(customView: button)
-        self.navigationItem.leftBarButtonItem = barButton
-        
         quetions_X_lbl.adjustsFontSizeToFitWidth = true
         quetions_Y_lbl.adjustsFontSizeToFitWidth = true
         quetions_Z_lbl.adjustsFontSizeToFitWidth = true
         totalpagepointsLbl.adjustsFontSizeToFitWidth = true
         
         totalpagepointsLbl.adjustsFontSizeToFitWidth = true
-//        if UIDevice().userInterfaceIdiom == .phone {
-//
-//            MainScrollView.contentSize = CGSize(width: 375, height: 1100)
-//            MainUiView.frame = CGRect(x: 0, y: 0, width:  375, height:  1100)
-//
-//        }
         if(UIDevice .current.userInterfaceIdiom == .phone) {
             
             MainScrollView.contentSize = CGSize(width: self.MainScrollView.bounds.width, height: 950)
@@ -124,14 +82,57 @@ class DragonClingonGameSheet_8_VC: UIViewController {
         quetion_Z_boolean_UIview.setBorder()
         quetion_Z_answer_UIView.setBorder()
         
-       // textfieldDelegate.initWithTextFields([self.answerfirstTV,self.answerSecandTV, self.answerthirdTV], onView: self.view)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        self.view.addGestureRecognizer(tap)
-        
-        print(DragonGame.page1TV1String)
-        
         self.quetions_Y_lbl.text = "Y. I use this experience with you ( " + DragonGame.page1TV1String + " ) as an opportunity to heal and bring me peace, power, freedom and new understandings."
+        
+        let tapView = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.view.addGestureRecognizer(tapView)
+        
+        let askButton = UIButton()
+        askButton.frame.size = CGSize(width: self.view.frame.size.width * 0.3, height: 30)
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 15
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        }else{
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        let rightItem = UIBarButtonItem(customView: askButton)
+        self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.rightBarButtonItem = rightItem
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func callMethod() {

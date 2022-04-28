@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D304B372148F4F6004D20F8 /* DragonGameDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D304B362148F4F6004D20F8 /* DragonGameDataModel.swift */; };
+		25F13C96281A7FFF006B9A7A /* GetInToushVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */; };
 		3BBF2D52C4953262EBD492D9 /* Pods_SO_FRGN_A912.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4B0FCF48C53D07BCD713CD /* Pods_SO_FRGN_A912.framework */; };
 		660FB224205F8A4B002D5435 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660FB223205F8A4B002D5435 /* Main_iPad.storyboard */; };
 		662AB3B31FCED61300501416 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662AB3B21FCED61300501416 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		0D304B362148F4F6004D20F8 /* DragonGameDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonGameDataModel.swift; sourceTree = "<group>"; };
+		25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInToushVC.swift; sourceTree = "<group>"; };
 		660FB223205F8A4B002D5435 /* Main_iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		662AB3AF1FCED61300501416 /* SO_FRGN_A912.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SO_FRGN_A912.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		662AB3B21FCED61300501416 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				6665EB9A1FCFF78900BC67A2 /* DLRadioButton.h */,
 				6665EB991FCFF78900BC67A2 /* DLRadioButton.m */,
 				6665EB981FCFF78800BC67A2 /* SO_FRGN_A912-Bridging-Header.h */,
+				25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */,
 			);
 			path = SO_FRGN_A912;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				668DD4DA2113228000F67CED /* Abbriviated_2_ViewController.swift in Sources */,
 				668DD4D32113228000F67CED /* Current_2_ViewController.swift in Sources */,
 				669EF600204D0B76004929BF /* RDTextFieldDelegate.swift in Sources */,
+				25F13C96281A7FFF006B9A7A /* GetInToushVC.swift in Sources */,
 				663684371FD532800014257B /* PersonalInfoViewController.swift in Sources */,
 				666E1A6A21146DBB00DCE0CB /* DragonClingonGameSheet_4_VC.swift in Sources */,
 				66FF4EDF2115921500EBDED0 /* DragonGameShareVC.swift in Sources */,

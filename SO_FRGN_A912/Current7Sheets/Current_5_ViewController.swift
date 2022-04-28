@@ -13,7 +13,7 @@
 //Help me open a direct, conscious relationship with & gently remove the denied, dissociated* & projected parts of my Carbon Based Memory
 import UIKit
 
-class Current_5_ViewController: UIViewController,UIGestureRecognizerDelegate {
+class Current_5_ViewController: UIViewController {
     var option1 : Int = 0
     var option2 : Int = 0
     var option3 : Int = 0
@@ -402,44 +402,11 @@ class Current_5_ViewController: UIViewController,UIGestureRecognizerDelegate {
     @IBOutlet weak var invitedname: UITextField!
     let textfieldDelegate = RDTextFieldDelegate()
     @IBOutlet weak var NextBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let label: UILabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 200, height: 50)))
-//        label.backgroundColor = UIColor.clear
-//        label.numberOfLines = 2
-//        label.font = UIFont.boldSystemFont(ofSize: 14)
-//        label.textAlignment = .center
-//        label.textColor = UIColor.white
-//        label.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-//        self.navigationItem.titleView = label
-        
-        let longTitleLabel = UILabel()
-        longTitleLabel.backgroundColor = UIColor.clear
-        longTitleLabel.numberOfLines = 2
-        if UIDevice().userInterfaceIdiom == .phone {
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-        }else{
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        }
-        longTitleLabel.textAlignment = .left
-        longTitleLabel.textColor = UIColor.white
-        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
-        longTitleLabel.sizeToFit()
-        self.navigationItem.hidesBackButton = true
-        let leftItem = UIBarButtonItem(customView: longTitleLabel)
-        self.navigationItem.leftBarButtonItem = leftItem
-        
         textfieldDelegate.initWithTextFields([self.invitedname], onView: self.view)
-        
-//        self.my_goal.layer.masksToBounds = false
-//        self.my_goal.layer.cornerRadius = 7
-//        self.my_goal.layer.shadowColor = UIColor.lightGray.cgColor
-//        self.my_goal.layer.borderWidth = 1.0
-//        self.my_goal.clipsToBounds = false
         
         self.invitedname.layer.masksToBounds = false
         self.invitedname.layer.cornerRadius = 7
@@ -461,8 +428,6 @@ class Current_5_ViewController: UIViewController,UIGestureRecognizerDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
         
-        
-        
         if UIDevice().userInterfaceIdiom == .phone {
             
             ScrollView.contentSize = CGSize(width: ScrollView.contentSize.width, height: 2050)
@@ -472,53 +437,30 @@ class Current_5_ViewController: UIViewController,UIGestureRecognizerDelegate {
             ScrollView.contentSize = CGSize(width: ScrollView.contentSize.width, height: 1650)
         }
     
-        
-        func SetFrames(){
-            
-//            if UIDevice().userInterfaceIdiom == .phone {
-//                //[UIScreen mainScreen].bounds.size.height > 480.0f ? 200 : 100;
-//                if UIScreen.main.bounds.width == 375{
-//
-//                    self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
-//
-//                    print("i am here")
-//                }else{
-//
-//                    self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
-//
-//                    print("i am here")
-//
-//
-//                }
-//            }
-            if UIDevice().userInterfaceIdiom == .phone {
-                //[UIScreen mainScreen].bounds.size.height > 480.0f ? 200 : 100;
-                if UIScreen.main.bounds.width == 375{
-                    
-                    self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
-                    
-                    print("i am here")
-                }else{
-                    
-                    self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
-                    
-                    print("i am here")
-                    
-                    
-                }
+        if UIDevice().userInterfaceIdiom == .phone {
+            //[UIScreen mainScreen].bounds.size.height > 480.0f ? 200 : 100;
+            if UIScreen.main.bounds.width == 375{
+                
+                self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
+                
+                print("i am here")
             }else{
                 
                 self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
                 
+                print("i am here")
+                
+                
             }
+        }else{
+            
+            self.ScrollView.frame = CGRect(x: 0, y: 0, width:  UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height)
+            
         }
-        
          healmycapacutyBtn.setTitle("and heal my capacity to generate " + FSSFString, for: .normal)
          healmycapacutyBtn.setTitle("and heal my capacity to generate " + FSSFString, for: .selected)
         
-//         FirstButton.setTitle("When upset, my perception is built out of corrupt data. The thing that drives my mind to use that particular data is my goal for " + FSFFString  + " to " + thirdscreenstring, for: .normal)
         
-//        FirstButton.setTitle("When upset, my perception is built out of corrupt data. The thing that drives my mind to use that particular data is my goal for " + FSFFString  + " to " + thirdscreenstring, for: .selected)
         FirstButton.setTitle("When upset, my perception is built out of corrupt data. The thing that drives my mind to use that particular data is my goal for " + FSFFString  + " to " + thirdscreenstring, for: .normal)
         SecandButton.setTitle("This perception a limiting, limited picture constructed from a max of 9 bits of data out of 10,000 brain cells firing", for: .selected)
          nowButton.setTitle("I now choose to collapse my mind's lies by willingly canceling my goal (driver) for " + FSFFString  + " to " + thirdscreenstring, for: .normal)
@@ -529,6 +471,56 @@ class Current_5_ViewController: UIViewController,UIGestureRecognizerDelegate {
             target: self, action: #selector(didTapLabelDemo))
         bycancellingLbl.addGestureRecognizer(taplabel)
         taplabel.delegate = (self as UIGestureRecognizerDelegate)
+        
+        let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.42)) / 2
+        let btnY = (self.view.frame.size.height - (hasBottomNotch ? 140 : 100))
+        let askButton = UIButton(frame: CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.42, height: 30))
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        if UIDevice().userInterfaceIdiom == .phone {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+        } else {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        }
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 15
+        self.view.addSubview(askButton)
+    
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        } else {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let tapURL = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tapURL)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func didTapLabelDemo(sender: UITapGestureRecognizer)
