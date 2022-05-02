@@ -199,4 +199,21 @@ extension UIViewController: UIGestureRecognizerDelegate {
     private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    func statusBarColorChange() {
+        
+        if #available(iOS 13.0, *) {
+            
+            let statusBar = UIView(frame: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+            statusBar.backgroundColor = .black
+            statusBar.tag = 100
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(statusBar)
+            
+        } else {
+            
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = .black
+            
+        }
+    }
 }

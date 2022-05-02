@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D304B372148F4F6004D20F8 /* DragonGameDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D304B362148F4F6004D20F8 /* DragonGameDataModel.swift */; };
+		25683A07281FCABE00D3CA51 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25683A06281FCABE00D3CA51 /* WebView.swift */; };
 		25F13C96281A7FFF006B9A7A /* GetInToushVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */; };
 		3BBF2D52C4953262EBD492D9 /* Pods_SO_FRGN_A912.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4B0FCF48C53D07BCD713CD /* Pods_SO_FRGN_A912.framework */; };
 		660FB224205F8A4B002D5435 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660FB223205F8A4B002D5435 /* Main_iPad.storyboard */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		0D304B362148F4F6004D20F8 /* DragonGameDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonGameDataModel.swift; sourceTree = "<group>"; };
+		25683A06281FCABE00D3CA51 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInToushVC.swift; sourceTree = "<group>"; };
 		660FB223205F8A4B002D5435 /* Main_iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		662AB3AF1FCED61300501416 /* SO_FRGN_A912.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SO_FRGN_A912.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,7 +160,9 @@
 				662AB3B41FCED61300501416 /* ViewController.swift */,
 				663684361FD532800014257B /* PersonalInfoViewController.swift */,
 				C079658F266E0EF7002D076C /* Commitment.swift */,
+				25683A06281FCABE00D3CA51 /* WebView.swift */,
 				C0776172266F35F4008FD95A /* AlertView.swift */,
+				25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */,
 				668DD4CA2113228000F67CED /* AbrevatedSheets */,
 				668DD4C22113227F00F67CED /* Current7Sheets */,
 				667506801FDFC9FD00B33B2E /* ResultViewController.swift */,
@@ -174,7 +178,6 @@
 				6665EB9A1FCFF78900BC67A2 /* DLRadioButton.h */,
 				6665EB991FCFF78900BC67A2 /* DLRadioButton.m */,
 				6665EB981FCFF78800BC67A2 /* SO_FRGN_A912-Bridging-Header.h */,
-				25F13C95281A7FFF006B9A7A /* GetInToushVC.swift */,
 			);
 			path = SO_FRGN_A912;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				666E1A68211467C300DCE0CB /* DragonClingonGameSheet_3_VC.swift in Sources */,
 				668DD4D92113228000F67CED /* Abbriviated_1_ViewController.swift in Sources */,
 				668DD4DD2113228000F67CED /* Abbriviated_5_ViewController.swift in Sources */,
+				25683A07281FCABE00D3CA51 /* WebView.swift in Sources */,
 				666E1A6621145EC900DCE0CB /* DragonClingonGameSheet_2_VC.swift in Sources */,
 				668DD4D62113228000F67CED /* Current_5_ViewController.swift in Sources */,
 				662AB3B31FCED61300501416 /* AppDelegate.swift in Sources */,

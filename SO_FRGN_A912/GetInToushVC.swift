@@ -34,7 +34,7 @@ class GetInToushVC: UIViewController, UITextViewDelegate, MFMailComposeViewContr
         self.QuestionTXTVIEW.layer.cornerRadius = 10
         self.QuestionTXTVIEW.layer.borderColor = UIColor.black.cgColor
         self.QuestionTXTVIEW.layer.borderWidth = 1.0
-        self.QuestionTXTVIEW.clipsToBounds = false
+        self.QuestionTXTVIEW.clipsToBounds = true
         QuestionTXTVIEW.text = "Write Question"
         QuestionTXTVIEW.textColor = UIColor.lightGray
         QuestionTXTVIEW.delegate = self
