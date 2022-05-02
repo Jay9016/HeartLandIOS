@@ -69,10 +69,13 @@ class Current_3_ViewController: UIViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         } else {
-            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.3)) / 2
+            let btnY = self.view.frame.size.height - 150
+            askButton.frame = CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.3, height: 50)
         }
         askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
-        askButton.layer.cornerRadius = 15
+        askButton.layer.cornerRadius = 25
         self.view.addSubview(askButton)
         
         let longTitleLabel = UILabel()

@@ -202,10 +202,13 @@ class Abbriviated_7_ViewController: UIViewController {
         if UIDevice().userInterfaceIdiom == .phone {
             askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         } else {
-            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.3)) / 2
+            let btnY = self.view.frame.size.height - 150
+            askButton.frame = CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.3, height: 50)
         }
         askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
-        askButton.layer.cornerRadius = 15
+        askButton.layer.cornerRadius = 25
         self.view.addSubview(askButton)
         
         let longTitleLabel = UILabel()
@@ -243,29 +246,17 @@ class Abbriviated_7_ViewController: UIViewController {
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {        // handling code
-        
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
 extension Abbriviated_7_ViewController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
         let vc = Abbriviated_7_ViewController()

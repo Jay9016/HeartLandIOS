@@ -125,21 +125,21 @@ class ViewController: UIViewController {
         UIApplication.shared.open(url)
     }
     
-    @IBAction func DragonClingonGameButtonAction(_ sender: Any) {//DragonIditifier
+    @IBAction func DragonClingonGameButtonAction(_ sender: Any) {
         performSegue(withIdentifier: "ToDrgaonGameIdentifier", sender: self)
     }
     
-    @IBAction func EventButtonAction(_ sender: Any) {//DragonIditifier
+    @IBAction func EventButtonAction(_ sender: Any) {
         guard let url = URL(string: "https://whyagain.org/schedule/") else { return }
         UIApplication.shared.open(url)
     }
     
-    @IBAction func MoreButtonAction(_ sender: Any) {//DragonIditifier
+    @IBAction func MoreButtonAction(_ sender: Any) {
         guard let url = URL(string: "https://whyagain.org/more/") else { return }
         UIApplication.shared.open(url)
     }
     
-    @IBAction func RadioShowButtonAction(_ sender: Any) {//DragonIditifier
+    @IBAction func RadioShowButtonAction(_ sender: Any) {
         guard let url = URL(string: "https://whyagain.org/mindshifters-radio-the-forgiveness-doctor/") else { return }
         UIApplication.shared.open(url)
     }
@@ -244,7 +244,7 @@ class ViewController: UIViewController {
     }
     
     func SetFrames(){
-        
+        statusBarColorChange()
         if UIDevice().userInterfaceIdiom == .phone {
             self.RealityWakeUpBtn.frame.origin.y = 20
             self.CurrentStepBtn.frame.origin.y = self.GetYandHeight(passView: RealityWakeUpBtn) - 5
@@ -268,13 +268,19 @@ class ViewController: UIViewController {
             self.CurrentStepBtn.frame.origin.y = self.GetYandHeight(passView: RealityWakeUpBtn)
             self.DragonClingonGameBtn.frame.origin.y = self.GetYandHeight(passView: CurrentStepBtn)
             self.CommitmentButton.frame.origin.y = self.GetYandHeight(passView: DragonClingonGameBtn)
-            self.MoreBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton) - 5
-            self.EventBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton) - 5
-            self.SendUsQuestionsBtn.frame.origin.y = self.GetYandHeight(passView: EventBtn) - 5
-            self.middleLbl.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
-            self.HeartShapeBtnLeft.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
-            self.HeartShapeBtnRight.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
+            self.MoreBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
+            self.EventBtn.frame.origin.y = self.GetYandHeight(passView: CommitmentButton)
+            self.SendUsQuestionsBtn.frame.origin.y = self.GetYandHeight(passView: EventBtn)
+            self.middleLbl.frame.origin.y = self.GetYandHeight(passView: SendUsQuestionsBtn)
+            self.HeartShapeBtnLeft.frame.origin.y = self.GetYandHeight(passView: SendUsQuestionsBtn)
+            self.HeartShapeBtnRight.frame.origin.y = self.GetYandHeight(passView: SendUsQuestionsBtn)
             self.couplelogo_ImgView.frame.origin.y = self.GetYandHeight(passView: middleLbl)
+            self.nameLbl.frame.origin.y = self.GetYandHeight(passView: couplelogo_ImgView) - 50
+            self.KnowMoreBtn.frame.origin.y = self.GetYandHeight(passView: nameLbl) - 20
+            self.BottomLblFirst.frame.origin.y = self.GetYandHeight(passView: KnowMoreBtn) - 10
+            self.BottomLblSecand.frame.origin.y = self.GetYandHeight(passView: BottomLblFirst) - 10
+            self.BottomLblThird.frame.origin.y = self.GetYandHeight(passView: BottomLblSecand) - 10
+            self.ListenRadioShowBtn.frame.origin.y = self.GetYandHeight(passView: BottomLblThird) - 5
             
         }
     }

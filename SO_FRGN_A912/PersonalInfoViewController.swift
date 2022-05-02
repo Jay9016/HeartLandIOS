@@ -37,35 +37,37 @@ class PersonalInfoViewController: UIViewController,UITextFieldDelegate {
             self.name.becomeFirstResponder()
 
             self.ShowAlert("Heartland Aramaic Forgiveness", AlertMessage: "Name is Required.", AlertTag: 1001)
-
-        }else if Email == "" ||  self.isValidEmail(Email) != true{
+            return
+        }
+        
+        if Email == "" ||  self.isValidEmail(Email) != true{
 
             self.email.becomeFirstResponder()
 
             self.ShowAlert("Heartland Aramaic Forgiveness", AlertMessage: "Valid Email is Required.", AlertTag: 1001)
-
-        }else if Mobile == "" {
-
-            self.mobile.becomeFirstResponder()
-
-            self.ShowAlert("Heartland Aramaic Forgiveness", AlertMessage: " Valide Mobile number is Required.", AlertTag: 1001)
-
-        }else if Mobile.count < 10 {
+            return
+        }
+        
+        if Mobile == "" {
 
             self.mobile.becomeFirstResponder()
 
-            self.ShowAlert("Heartland Aramaic Forgiveness", AlertMessage: "Mobile number must be at least 10 digits long.", AlertTag: 1001)
+            self.ShowAlert("Heartland Aramaic Forgiveness", AlertMessage: "Mobile number is Required.", AlertTag: 1001)
+            return
+        }
+        
+        if self.isValidPhone(phone: Mobile) != true {
 
-        }else{
+            self.mobile.becomeFirstResponder()
+
+            self.ShowAlert("Heartland Aramaic Forgiveness", AlertMessage: "Valid Mobile number is Required.", AlertTag: 1001)
+            return
+        }
 
               UserDefaults.standard.set(name.text, forKey: "Name")
               UserDefaults.standard.set(mobile.text, forKey: "mobile")
               UserDefaults.standard.set(email.text, forKey: "email")
               UserDefaults.standard.set(true, forKey: "IsInfoSave")
-//              print(UserDefaults.standard.value(forKey: "Name"))
-//              print(UserDefaults.standard.value(forKey: "mobile"))
-//              print(UserDefaults.standard.value(forKey: "email"))
-//              print(UserDefaults.standard.value(forKey: "IsInfoSave"))
 
             Constants.name = name.text!
             Constants.email = email.text!
@@ -77,7 +79,7 @@ class PersonalInfoViewController: UIViewController,UITextFieldDelegate {
                 performSegue(withIdentifier: "toForm1_7Step", sender: self)
             }
 
-        }
+        
         
 //        if(whichSheet=="sheet1"){
 //            performSegue(withIdentifier: "toForm1Abbreviated", sender: self)
@@ -89,7 +91,7 @@ class PersonalInfoViewController: UIViewController,UITextFieldDelegate {
     
     func isValidPhone(phone: String) -> Bool {
      
-        let PHONE_REGEX = "^[0-9'@s]{10,10}$"
+        let PHONE_REGEX = "^[0-9'@s]{10,15}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
         let result =  phoneTest.evaluate(with: phone)
         return result

@@ -19,30 +19,6 @@ class Commitment: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let longTitleLabel = UILabel()
-        longTitleLabel.backgroundColor = UIColor.clear
-        longTitleLabel.numberOfLines = 2
-        if UIDevice().userInterfaceIdiom == .phone {
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-        }else{
-            
-            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        }
-        longTitleLabel.textAlignment = .left
-        longTitleLabel.textColor = UIColor.white
-        longTitleLabel.text = "HeartLand Aramaic Forgiveness"
-        longTitleLabel.sizeToFit()
-        self.navigationItem.hidesBackButton = true
-        
-        let leftItem = UIBarButtonItem(customView: longTitleLabel)
-        self.navigationItem.leftBarButtonItem = leftItem
-        
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back(sender:)))
-        newBackButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)], for: .normal)
-        self.navigationItem.rightBarButtonItem = newBackButton
         
         self.titleView.frame.origin.y = 80
         self.myCommitmentView.frame.origin.y = self.GetYandHeight(passView: self.titleView)
@@ -50,6 +26,59 @@ class Commitment: UIViewController {
         self.SomebodyView.frame.origin.y = self.GetYandHeight(passView: self.commitmenttomyselfView)
         self.PromisetomyselfView.frame.origin.y = self.GetYandHeight(passView: self.SomebodyView)
         self.PromisetoyouView.frame.origin.y = self.GetYandHeight(passView: self.PromisetomyselfView)
+        
+        let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.42)) / 2
+        let btnY = (self.view.frame.size.height - (hasBottomNotch ? 140 : 100))
+        let askButton = UIButton(frame: CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.42, height: 30))
+        askButton.backgroundColor = UIColor(red: 237/255, green: 53/255, blue: 114/255, alpha: 1.0)
+        askButton.setTitle(" Instant: Ask Question", for: .normal)
+        askButton.setImage(UIImage(named: "ask_question"), for: .normal)
+        askButton.setTitleColor(.white, for: .normal)
+        if UIDevice().userInterfaceIdiom == .phone {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+        } else {
+            askButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            let btnX = (self.view.frame.size.width - (self.view.frame.size.width * 0.3)) / 2
+            let btnY = self.view.frame.size.height - 150
+            askButton.frame = CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.3, height: 50)
+        }
+        askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
+        askButton.layer.cornerRadius = 25
+        self.view.addSubview(askButton)
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.backgroundColor = UIColor.clear
+        longTitleLabel.numberOfLines = 2
+        
+        if UIDevice().userInterfaceIdiom == .phone {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        } else {
+            longTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        }
+        
+        longTitleLabel.textAlignment = .left
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.text = "Heartland Aramaic Forgiveness\nwww.whyagain.org"
+        longTitleLabel.sizeToFit()
+        longTitleLabel.isUserInteractionEnabled = true
+        self.navigationItem.hidesBackButton = true
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        let tapURL = UITapGestureRecognizer(target: self, action: #selector(self.handleTapURL(_:)))
+        longTitleLabel.addGestureRecognizer(tapURL)
+    }
+    
+    @objc func handleTapURL(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        guard let url = URL(string: "https://whyagain.org/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @objc func handleTapAskQuestion(_ sender: UIButton? = nil) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "GetInToushVC") as! GetInToushVC
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     func GetYandHeight(passView:UIView)->CGFloat {
@@ -62,8 +91,6 @@ class Commitment: UIViewController {
     }
     
     @objc func back(sender: UIBarButtonItem) {
-        
-        
         for vc in self.navigationController!.viewControllers {
             // Check if the view controller is of MyGroupViewController type
             if let myGropupVC = vc as? ViewController {
@@ -73,32 +100,34 @@ class Commitment: UIViewController {
     }
 
     @IBAction func commitment(_ sender:UIButton) {
-        if let url = URL(string: "https://whyagain.org/wp/wp-content/uploads/2012/06/My_Commitment_2017.pdf"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        
+        GotoWebView(url: "https://whyagain.org/mycommitment/")
     }
     
     @IBAction func commitmenttomyself(_ sender:UIButton) {
-        if let url = URL(string: "https://whyagain.org/wp/wp-content/uploads/2012/06/First_Person_Commitment_2017.pdf"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        
+        GotoWebView(url: "https://whyagain.org/commitmenttomyself/")
     }
     
     @IBAction func somebody(_ sender:UIButton) {
-        if let url = URL(string: "https://whyagain.org/wp/wp-content/uploads/2012/06/I_AM_Sombody_2017.pdf"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        
+        GotoWebView(url: "https://whyagain.org/child-s-commitments/")
     }
     
     @IBAction func promisetomyself(_ sender:UIButton) {
-        if let url = URL(string: "https://whyagain.org/wp/wp-content/uploads/2012/06/My_Promise_To_Myself_2017.pdf"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        
+        GotoWebView(url: "https://whyagain.org/child-s-commitments/")
     }
     
     @IBAction func promisetoyou(_ sender:UIButton) {
-        if let url = URL(string: "https://whyagain.org/wp/wp-content/uploads/2012/06/My_Promise_To_You_2017.pdf"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        
+        GotoWebView(url: "https://whyagain.org/child-s-commitments/")
+    }
+    
+    func GotoWebView(url: String) {
+        let storyboard = UIStoryboard(name: "Main_iPad", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "WebView") as! WebView
+        WebURL = url
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
