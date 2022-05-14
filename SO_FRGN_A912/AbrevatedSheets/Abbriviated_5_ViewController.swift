@@ -270,7 +270,9 @@ class Abbriviated_5_ViewController: UIViewController {
             askButton.frame = CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.3, height: 50)
         }
         askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
-        askButton.layer.cornerRadius = 25
+        DispatchQueue.main.async {
+            askButton.layer.cornerRadius = askButton.frame.height / 2
+        }
         self.view.addSubview(askButton)
         
         longTitleLabel.textAlignment = .left
