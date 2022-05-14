@@ -20,7 +20,7 @@ class Commitment: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.titleView.frame.origin.y = 80
+        self.titleView.frame.origin.y = 20
         self.myCommitmentView.frame.origin.y = self.GetYandHeight(passView: self.titleView)
         self.commitmenttomyselfView.frame.origin.y = self.GetYandHeight(passView: self.myCommitmentView)
         self.SomebodyView.frame.origin.y = self.GetYandHeight(passView: self.commitmenttomyselfView)
@@ -43,7 +43,9 @@ class Commitment: UIViewController {
             askButton.frame = CGRect(x: btnX, y: btnY, width: self.view.frame.size.width * 0.3, height: 50)
         }
         askButton.addTarget(self, action: #selector(handleTapAskQuestion(_:)), for: .touchUpInside)
-        askButton.layer.cornerRadius = 25
+        DispatchQueue.main.async {
+            askButton.layer.cornerRadius = askButton.frame.height / 2
+        }
         self.view.addSubview(askButton)
         
         let longTitleLabel = UILabel()
@@ -97,6 +99,11 @@ class Commitment: UIViewController {
                 self.navigationController?.popToViewController(myGropupVC, animated: true)
             }
         }
+    }
+    
+    @IBAction func back(_ sender:UIButton) {
+        
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func commitment(_ sender:UIButton) {

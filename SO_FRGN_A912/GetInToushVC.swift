@@ -101,6 +101,11 @@ class GetInToushVC: UIViewController, UITextViewDelegate, MFMailComposeViewContr
         sender.isSelected = !sender.isSelected
     }
     
+    @IBAction func back(_ sender:UIButton) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //jeanieryce@gmail.com
     //Please add me to your mailing list : Name: jay, Email ID: jvaddoriya@gmail.com
     //jvaddoriya@gmail.com
